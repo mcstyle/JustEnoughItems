@@ -80,7 +80,19 @@ public class Ingredients implements IIngredients {
 		if (inputs == null) {
 			return Collections.emptyList();
 		}
-		return inputs;
+		ArrayList inputsFiltered = new ArrayList<T>();
+		for (List<T> input : inputs) {
+			ArrayList inputFiltered = new ArrayList<T>();
+			for (T item : input) {
+				if (!Internal.getHelpers().getIngredientBlacklist()
+						.isIngredientBlacklisted(item)) {
+					inputFiltered.add(item);
+				}
+			}
+			inputsFiltered.add(inputFiltered);
+		}
+
+		return inputsFiltered;
 	}
 
 	@Override
